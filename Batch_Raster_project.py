@@ -42,7 +42,6 @@ for inpath in path:
         Raster_Project(indir,outdir,character,prj_path,reproject_type)
         print('{} is ok '.format(year))
     print('{}  is ok !!!!!'.format(inpath))
-=======
 # coding:utf-8
 import glob
 import arcpy
