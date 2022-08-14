@@ -26,7 +26,7 @@ def SetNodata(indir,outdir,character):
 
 
 
-path = {r'F:\Integrated_analysis_data\Data\LAI':'tif'}
+path = {r'J:\Integrated_analysis_data\Data\1Y\MODIS_2000_2017_1y':'tif'}
 
 
 styear = 2002
@@ -34,7 +34,7 @@ edyear = 2018
 
 for inpath in path:
     print(inpath)
-    character = 'Mask*.' + path[inpath]
+    character = 'Mul*.' + path[inpath]
     for year in range(styear, edyear + 1):
         indir = inpath + os.sep + 'MCD15A2_LAI_' + str(year)
         outdir = indir

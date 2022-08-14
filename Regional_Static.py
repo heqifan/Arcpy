@@ -37,10 +37,10 @@ startY = 1980
 endY = 2020+1
 
 '''运行'''
-for shpi in range(0, len(Region)):  #循环多个矢量
+for shpi in range(0, len(Region)):       #循环多个矢量
     pass
     for cla in range(0, len(tifPath)):   #循环每个文件夹
-        env.workspace = tifPath[cla]   #设置工作空间
+        env.workspace = tifPath[cla]     #设置工作空间
         tiffiles = arcpy.ListFiles(r'*' + keys[cla] + '*.tif')
         print('Process_Data have  :',tiffiles)
         #tiffiles.sort()   #将文件名进行排序（升序排序）

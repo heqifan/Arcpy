@@ -10,14 +10,14 @@ arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
 
-inpath = r'F:\sum_1110\RNEP' #输入路径
-outpath = r'E:\陈星师姐\2\NEP_10y_Mean'
+inpath = r'K:\HeQiFan\Out\Normal_Mean_Year' #输入路径
+outpath = r'K:\HeQiFan\Out\Normal_Mean_Year\Mean'
 # Press the green button in the gutter to run the script.
 
 styear = 2000
 edyear = 2018
 
-character = 'NPP_*.tif'
+character = 'Nor*.tif'
 
 def Mean(indir,outdir,character):
     Sum = 0
@@ -39,15 +39,19 @@ def Mean(indir,outdir,character):
     if not os.path.exists(outdir):
         os.makedirs(outdir)
         print('{} is create ok!!!!!!'.format(outdir))
-    (Sum/N).save(outdir + os.sep + 'Mean_' + indir + '.tif')
+    (Sum/N).save(outdir + os.sep + 'Mean_' + indir.split('\\')[-1] + '.tif')
     print(outdir + ' is ok ')
     return 1
 
 
 
-for year in range(styear,edyear+1):
-    dir  = inpath + os.sep + str(year)
-    outdir  = outpath + os.sep + str(year)
-    Mean(dir,outdir,character)
-    print(outdir + ' is ok ')
+# for year in range(styear,edyear+1):
+#     dir  = inpath + os.sep + str(year)
+#     outdir  = outpath + os.sep + str(year)
+#     Mean(dir,outdir,character)
+#     print(outdir + ' is ok ')
+# print('ALL is ok !!!!!!!!!!!')
+Mean(inpath,outpath,character)
+print(outpath + ' is ok ')
 print('ALL is ok !!!!!!!!!!!')
+
