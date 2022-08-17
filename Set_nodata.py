@@ -16,26 +16,26 @@ def set_nodata(dir,outdir,scope,distinguish):
         print(str(i) + ' Save is ok  !!!')
 
 
-styear = 2003
+styear = 2000
 edyear = 2017
 
 arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
-inpath = r'K:\HeQiFan\BMA'
+inpath = r'K:\HeQiFan\1Y\MODIS_2000_2017_1y'
 
-outpath = r'K:\HeQiFan\BMA'
+outpath = r'K:\HeQiFan\1Y\MODIS_2000_2017_1y'
 
 scope =  "VALUE < 0"
 
-distinguish = '*.tif'
+distinguish = 'Mask*.tif'
 
 
-# for year in range(styear,edyear+1):
-#     dir  = inpath + os.sep + str(year)
-#     outdir  = outpath + os.sep + str(year)
-#     set_nodata(dir,outdir,scope,distinguish)
-#     print(outdir + ' is ok ')
-# print('ALL is ok !!!!!!!!!!!')
+for year in range(styear,edyear+1):
+    dir  = inpath + os.sep + str(year)
+    outdir  = outpath + os.sep + str(year)
+    set_nodata(dir,outdir,scope,distinguish)
+    print(outdir + ' is ok ')
+print('ALL is ok !!!!!!!!!!!')
 
-set_nodata(inpath,outpath,scope,distinguish)
+# set_nodata(inpath,outpath,scope,distinguish)
