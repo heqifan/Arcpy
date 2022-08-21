@@ -22,16 +22,17 @@ edyear = 2017
 arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
-inpath = r'K:\HeQiFan\1Y\MODIS_2000_2017_1y'
+inpath = r'J:\Integrated_analysis_data\Data\1Y\W_2000_2017_1y'
 
-outpath = r'K:\HeQiFan\1Y\MODIS_2000_2017_1y'
+outpath = r'J:\Integrated_analysis_data\Data\1Y\W_2000_2017_1y'
 
-scope =  "VALUE < 0"
+scope =  "VALUE > 3200"
 
-distinguish = 'Mask*.tif'
+distinguish = 'Re*.tif'
 
 
 for year in range(styear,edyear+1):
+    print(year)
     dir  = inpath + os.sep + str(year)
     outdir  = outpath + os.sep + str(year)
     set_nodata(dir,outdir,scope,distinguish)

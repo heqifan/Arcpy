@@ -9,8 +9,8 @@ import pandas as pd
 arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
-# inpath = r'K:\HeQiFan\0816\drive\out_temperature'
 inpath = r'K:\HeQiFan\0816\drive\out_precipitation'
+# inpath = r'K:\HeQiFan\0816\drive\out_temperature'
 # dirs = ['Normal_LAI','Normal_Geodata','Normal_GLASS','Normal_MODIS','Normal_TPDC','Normal_W']
 #
 # distinguishs = ['Mask_*.tif','Mask_*.tif','Mask_*.tif','Mask_*.tif','Mask_*.tif','Mask_*.tif']
@@ -75,11 +75,12 @@ edyear = 2020
 
 all_pd = pd.DataFrame({'Regions':[1,2,3,4]})
 for year in range(styear,edyear+1):
-    dir = inpath + os.sep + str(year) +  '_Mean'
-    dir = inpath + os.sep + str(year) + '_Sum'
+    dir = inpath + os.sep + str(year) +  '_Sum_'
+    # dir = inpath + os.sep + str(year) + '_Sum'
     arcpy.env.scratchWorkspace =  dir
     env.workspace =  dir  #Setting up the workspace
     tif = arcpy.ListRasters('*.tif')[0]
+    print(tif)
     outTable = tif.split('.')[0] + '.dbf'
     '''Zonal Statistics as Table'''
     outZSaT = ZonalStatisticsAsTable(static_tif,'Value', tif,
@@ -90,8 +91,9 @@ for year in range(styear,edyear+1):
     pd.set_option('precision', 15)
     '''Statics'''
     csv = pd.read_csv(dir + os.sep + outcsv).sort_values(["Value"],ascending=True)
-    all_pd['Mean'+str(year)] = csv['MEAN']
-
+    all_pd['Count'] = csv['COUNT']
+    # all_pd['Mean'+str(year)] = csv['MEAN']
+    all_pd['Sum' + str(year)] = csv['MEAN']
 '''Export Result'''
 # all_pd.to_excel(xlsx_path + os.sep + 'Static_temperature.xlsx',index = False)
 all_pd.to_excel(xlsx_path + os.sep + 'Static_precipitation.xlsx',index = False)
