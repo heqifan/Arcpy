@@ -1,4 +1,3 @@
-
 # coding:utf-8
 import glob
 import arcpy
@@ -10,27 +9,27 @@ arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
 
-inpath = r'F:\Integrated_analysis_data\Data\LAI' #输入路径
-outpath = r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y'
+# inpath = r'F:\Integrated_analysis_data\Data\LAI' #输入路径
+# outpath = r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y'
 # Press the green button in the gutter to run the script.
 
-styear = 2003
-edyear = 2017
+# styear = 2003
+# edyear = 2017
 
-character = 'Con*.tif'
-inpath = r'F:\Integrated_analysis_data\Data\Geodata_1981_2018_8d' #输入路径
-outpath = r'F:\Integrated_analysis_data\Data\Geodata_1981_2018_1y'
+# character = 'Con*.tif'
+inpath = r'J:\Integrated_analysis_data\Data\8D\GLASS_1982_2018_8d' #输入路径
+outpath = r'J:\Integrated_analysis_data\Data\1Y\GLASS_2000_2017_1y'
 # Press the green button in the gutter to run the script.
 
-styear = 2000
-edyear = 2017
+styear = 2018
+edyear = 2018
 
-character = 'Resample*.tif'
+character = 'Mask_*.tif'
 
 def Sum(indir,outdir,character,Y_N,year):
     Sum = 0
-    arcpy.env.scratchWorkspace =  indir + os.sep
-    env.workspace =  indir + os.sep   #设置工作空间
+    arcpy.env.scratchWorkspace =  indir
+    env.workspace =  indir   #设置工作空间
     List = arcpy.ListRasters(character)
     List.sort()
     print('List: {}'.format(List))
@@ -65,8 +64,7 @@ for year in range(styear,edyear+1):
     else:
         print(u'{}不是闰年'.format(year))
         Y_N = 'N'
-    dir  = inpath + os.sep + 'MCD15A2_LAI_' + str(year)
-    dir  = inpath + os.sep + str(year)
+    dir  = inpath + os.sep +  str(year)
     outdir  = outpath + os.sep + str(year)
     Sum(dir,outdir,character,Y_N,year)
     print(outdir + ' is ok ')

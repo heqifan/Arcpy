@@ -11,26 +11,26 @@ arcpy.gp.overwriteOutput = 1
 
 
 
-inpath = r'F:\Integrated_analysis_data\Data\LAI' #输入路径
-outpath = r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y'
+# inpath = r'F:\Integrated_analysis_data\Data\LAI' #输入路径
+# outpath = r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y'
 # Press the green button in the gutter to run the script.
 
-styear = 2003
-edyear = 2017
+# styear = 2003
+# edyear = 2017
 
 
-character = 'lai*.flt'
-inpath = r'F:\Integrated_analysis_data\Data\8D\Geodata_1981_2018_8d' #输入路径
-outpath = inpath + 'to_1y_result'
+# character = 'lai*.flt'
+inpath = r'J:\Integrated_analysis_data\Data\8D\Geodata_1981_2018_8d' #输入路径
+outpath = inpath + os.sep + 'to_1y_result'
 # Press the green button in the gutter to run the script.
 
-styear = 2000
-edyear = 2017
+styear = 1981
+edyear = 1999
 
 
-character = 'Resample_*.tif'
+character = 'NPP.*.tif'
 
-def Mean(indir,outdir,character,Y_N):
+def Mean(indir,outdir,character,Y_N,year):
     Sum = 0
     N = 0
     arcpy.env.scratchWorkspace =  indir + os.sep
@@ -55,7 +55,7 @@ def Mean(indir,outdir,character,Y_N):
     if not os.path.exists(outdir):
         os.makedirs(outdir)
         print('{} is create ok!!!!!!'.format(outdir))
-    (Sum/N).save(outdir + os.sep + 'Mean_' + indir + '.tif')
+    (Sum/N).save(outdir + os.sep + 'Mean_' + str(year) + '.tif')
     print(outdir + ' is ok ')
     return 1
 
@@ -69,11 +69,9 @@ for year in range(styear,edyear+1):
         print(u'{}不是闰年'.format(year))
         Y_N = 'N'
 
-    dir = inpath + os.sep + 'MCD15A2_LAI_' + str(year)
-
     dir = inpath + os.sep + str(year)
 
     outdir = outpath + os.sep + str(year)
-    Mean(dir,outdir,character,Y_N)
+    Mean(dir,outdir,character,Y_N,year)
     print(outdir + ' is ok ')
 print('ALL is ok !!!!!!!!!!!')

@@ -46,40 +46,39 @@ def Mean(indir,outdir,character):
     print(outdir + ' is ok ')
     return 1
 
-def Mean2(year_list,outdir,name):
-    Sum = 0
-    N = 0
-    if len(year_list) == 0:
-        print('{} length is {}'.format(indir, len(year_list)))
-        return 0
-    for data in year_list:
-        print('Data: {} '.format(data))
-        try:
-            Sum += Raster(str(data))  # 相加
-            N+=1
-        except RuntimeError:
-            print('{} is error continue'.format(data))
-            continue
-    if not os.path.exists(outdir):
-        os.makedirs(outdir)
-        print('{} is create ok!!!!!!'.format(outdir))
-    (Sum/N).save(outdir + os.sep + 'Mean_' + name + '.tif')
-    print(outdir + ' is ok ')
-    return 1
+# def Mean2(year_list,outdir,name):
+#     Sum = 0
+#     N = 0
+#     if len(year_list) == 0:
+#         return 0
+#     for data in year_list:
+#         print('Data: {} '.format(data))
+#         try:
+#             Sum += Raster(str(data))  # 相加
+#             N+=1
+#         except RuntimeError:
+#             print('{} is error continue'.format(data))
+#             continue
+#     if not os.path.exists(outdir):
+#         os.makedirs(outdir)
+#         print('{} is create ok!!!!!!'.format(outdir))
+#     (Sum/N).save(outdir + os.sep + 'Mean_' + name + '.tif')
+#     print(outdir + ' is ok ')
+#     return 1
 
-indir = r'K:\HeQiFan\0816\drive\out_precipitation'
-# outdir = r'K:\HeQiFan\Out\Multiply_Regression_Year\Mean'
-
-character = '*.tif'
-
-# Mean(indir, outdir,character)
-
-for year in range(styear,edyear+1):
-    dir  = indir + os.sep + str(year)
-    outdir  = dir + os.sep + 'Mean'
-    Mean(dir,outdir,character)
-    print(outdir + ' is ok ')
-print('ALL is ok !!!!!!!!!!!')
+# indir = r'K:\HeQiFan\0816\drive\out_precipitation'
+# # outdir = r'K:\HeQiFan\Out\Multiply_Regression_Year\Mean'
+#
+# character = '*.tif'
+#
+# # Mean(indir, outdir,character)
+#
+# for year in range(styear,edyear+1):
+#     dir  = indir + os.sep + str(year)
+#     outdir  = dir + os.sep + 'Mean'
+#     Mean(dir,outdir,character)
+#     print(outdir + ' is ok ')
+# print('ALL is ok !!!!!!!!!!!')
 
 
 # for pa in path:
@@ -94,4 +93,3 @@ print('ALL is ok !!!!!!!!!!!')
 #     Mean2(year_list,outdir,NAME)
 #     print(indir + ' is ok ')
 # print('ALL is ok !!!!!!!!!!!')
-
