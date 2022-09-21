@@ -8,7 +8,7 @@ arcpy.CheckOutExtension("Spatial")
 arcpy.gp.overwriteOutput = 1
 
 
-def Raster_Project(indir,outdir,character,resample_type,cellsize):
+def Raster_Project(indir,outdir,character,resample_type,mask_data,cellsize):
     arcpy.env.scratchWorkspace = indir
     env.workspace = indir
     List = arcpy.ListRasters(character)
@@ -16,7 +16,7 @@ def Raster_Project(indir,outdir,character,resample_type,cellsize):
         return 0
     for data in List:
         # try:
-        out_name = outdir + os.sep + "Resample_" + data[:-4] + '.tif'
+        out_name = outdir + os.sep + "Mask_" + data[:-4] + '.tif'
         # (fname, fename) = os.path.splittext(out_name)
         if (os.path.exists(out_name)):
             print('exist,continue')
@@ -24,6 +24,10 @@ def Raster_Project(indir,outdir,character,resample_type,cellsize):
         else:
             print(data)
             arcpy.Resample_management(data, outdir + os.sep + 'Resample_' + data[:-4] + ".tif" , cellsize, resample_type)
+            # arcpy.env.snapRaster = mask_data  # snap栅格
+            # arcpy.env.extent = mask_data  # 像元行列号一致
+            outExtractByMask = ExtractByMask(outdir + os.sep + "Resample_" + data[:-4] + ".tif", mask_data)
+            outExtractByMask.save(out_name)
             print(out_name)
         # except:
         #     # print(arcpy.GetMessages(2))
@@ -32,22 +36,24 @@ def Raster_Project(indir,outdir,character,resample_type,cellsize):
     return 1
 
 # path = {r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y':'tif'}
+prj_path  = r'E:\Integrated_analysis_data\Data\prj\WGS_1984_Albers.prj'
 
 resample_type = 'BILINEAR'
 
+mask_data = r'E:\Integrated_analysis_data\Data\Chinese_Regeion\chinese.shp'
 
-inpath = r'E:\Integrated_analysis_data\Data\1Y\MuSyQ_1981_2018_1y_chinese'
+inpath = r'E:\Integrated_analysis_data\Data\8D\GLASS_1982_2018_8d'
 
 cellsize = 1000
 
-styear = 1981
-edyear = 2018
+styear = 2017
+edyear = 2017
 
-character = 'Mul*.tif'
+character = '*_reproject.tif'
 for year  in range(styear,edyear+1):
     indir = inpath + os.sep + str(year)
     outdir = inpath + os.sep + str(year)
-    Raster_Project(indir,outdir,character,resample_type,cellsize)
+    Raster_Project(indir,outdir,character,resample_type,mask_data,cellsize)
     print('{} is ok '.format(year))
 print('{}  is ok !!!!!'.format(inpath))
 
@@ -65,4 +71,3 @@ print('{}  is ok !!!!!'.format(inpath))
 # outdir = indir
 # Raster_Project(indir,outdir,character,prj_path,reproject_type,mask_data)
 # print('{}  is ok !!!!!'.format(inpath))
-

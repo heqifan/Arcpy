@@ -18,10 +18,6 @@ arcpy.gp.overwriteOutput = 1
 #         }
 
 
-styear = 2000
-edyear = 2020
-
-
 def Mean(indir,outdir,character):
     Sum = 0
     N = 0
@@ -46,25 +42,25 @@ def Mean(indir,outdir,character):
     print(outdir + ' is ok ')
     return 1
 
-# def Mean2(year_list,outdir,name):
-#     Sum = 0
-#     N = 0
-#     if len(year_list) == 0:
-#         return 0
-#     for data in year_list:
-#         print('Data: {} '.format(data))
-#         try:
-#             Sum += Raster(str(data))  # 相加
-#             N+=1
-#         except RuntimeError:
-#             print('{} is error continue'.format(data))
-#             continue
-#     if not os.path.exists(outdir):
-#         os.makedirs(outdir)
-#         print('{} is create ok!!!!!!'.format(outdir))
-#     (Sum/N).save(outdir + os.sep + 'Mean_' + name + '.tif')
-#     print(outdir + ' is ok ')
-#     return 1
+def Mean2(year_list,outdir,name):
+    Sum = 0
+    N = 0
+    if len(year_list) == 0:
+        return 0
+    for data in year_list:
+        print('Data: {} '.format(data))
+        try:
+            Sum += Raster(str(data))  # 相加
+            N+=1
+        except RuntimeError:
+            print('{} is error continue'.format(data))
+            continue
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
+        print('{} is create ok!!!!!!'.format(outdir))
+    (Sum/N).save(outdir + os.sep + 'Mean_' + name + '.tif')
+    print(outdir + ' is ok ')
+    return 1
 
 # indir = r'K:\HeQiFan\0816\drive\out_precipitation'
 # # outdir = r'K:\HeQiFan\Out\Multiply_Regression_Year\Mean'
@@ -93,3 +89,15 @@ def Mean(indir,outdir,character):
 #     Mean2(year_list,outdir,NAME)
 #     print(indir + ' is ok ')
 # print('ALL is ok !!!!!!!!!!!')
+
+styear = 2000
+edyear = 2017
+inpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight'
+outpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight\Weight_Year_Mean'
+character = 'Weight*.tif'
+year_list = []
+for year in range(styear, edyear + 1):
+    indir = inpath + os.sep + str(year)
+    tif = glob.glob(indir + os.sep + character)[0]
+    year_list.append(tif)
+Mean2(year_list, outpath, 'Weight')

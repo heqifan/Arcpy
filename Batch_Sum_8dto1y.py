@@ -17,12 +17,13 @@ arcpy.gp.overwriteOutput = 1
 # edyear = 2017
 
 # character = 'Con*.tif'
-inpath = r'J:\Integrated_analysis_data\Data\8D\GLASS_1982_2018_8d' #输入路径
-outpath = r'J:\Integrated_analysis_data\Data\1Y\GLASS_2000_2017_1y'
+inpath = r'E:\Integrated_analysis_data\Data\8D\GLASS_1982_2018_8d' #输入路径
+outpath = r'E:\Integrated_analysis_data\Data\1Y\GLASS_1982_2018_1y_chinese'
 # Press the green button in the gutter to run the script.
 
-styear = 2018
+styear = 2011
 edyear = 2018
+
 
 character = 'Mask_*.tif'
 
@@ -45,10 +46,10 @@ def Sum(indir,outdir,character,Y_N,year):
             continue
     if  Y_N == 'Y':
         Sum += Raster(str(List[-1])) * 6
-        print('Data: {} '.format(List[-1]))
+        # print('Data: {} '.format(List[-1]))
     if  Y_N == 'N':
         Sum += Raster(str(List[-1])) * 5
-        print('Data: {} '.format(List[-1]))
+        # print('Data: {} '.format(List[-1]))
     if not os.path.exists(outdir):
         os.makedirs(outdir)
         print('{} is create ok!!!!!!'.format(outdir))

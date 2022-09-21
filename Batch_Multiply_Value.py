@@ -15,18 +15,17 @@ arcpy.gp.overwriteOutput = 1
 # outpath = r'F:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y'
 # Press the green button in the gutter to run the script.
 
-styear = 1982
-edyear = 1999
+styear = 1980
+edyear = 2020
 
 
 Multiply_Value = 1
 
-character = 'Mask_*.tif'
+character = 'RNPP_*.flt'
 
-inpath = r'J:\Integrated_analysis_data\Data\1Y\W_1982_2018_1y' #输入路径
-outpath = r'J:\Integrated_analysis_data\Data\1Y\W_1982_2018_1y'
+inpath = r'E:\sum_1110\RNPP' #输入路径
+outpath = r'E:\Integrated_analysis_data\Data\1Y\GLOPEM-CEVSA_1980_2020_1y_chinese'
 # Press the green button in the gutter to run the script.
-
 
 def Sum(indir,outdir,character,Multiply_Value,year):
     arcpy.env.scratchWorkspace =  indir + os.sep
@@ -46,9 +45,8 @@ def Sum(indir,outdir,character,Multiply_Value,year):
         except RuntimeError:
             print('{} is error continue'.format(data))
             continue
-        Mul.save(outdir + os.sep + 'Resample_' + str(year) + '.tif')
+        Mul.save(outdir + os.sep + 'Mul_' + str(year) + '.tif')
     return 1
-
 
 for year in range(styear,edyear+1):
     dir = inpath + os.sep + str(year)
