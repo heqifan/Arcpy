@@ -58,16 +58,16 @@ arcpy.CheckOutExtension("Spatial")
 # print('ALL is finish!!!!!')
 
 
-inpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight'
+inpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Bagging_forest'
 
-outpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight'
+outpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Bagging_forest'
 
-na = 'Weight'
+na = 'Bagging'
 styear = 2000
 edyear = 2017
 for year in range(styear, edyear+1):
     outdir = outpath + os.sep + str(year)
     arcpy.env.scratchWorkspace = inpath
     env.workspace = inpath
-    List = arcpy.ListRasters(na + '_' + str(year) + '*.tif')
+    List = arcpy.ListRasters(na + '_forest_' + str(year) + '*.tif')
     mosaic2(List,outdir,na + '_' + str(year))

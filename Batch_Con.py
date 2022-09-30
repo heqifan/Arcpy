@@ -16,25 +16,23 @@ def SetNodata(indir,outdir,character):
     if len(List) == 0:
         return 0
     for data in List:
-        try:
-            OutRas = Con(Raster(data)>=249,-1,data)
-            OutRas.save(outdir + os.sep + "Con_" + data[:-4] + '.tif')
-        except:
-            print('{} is error continue'.format(data))
-            continue
+        print(data)
+        OutRas = Con(IsNull(Raster(data)),0,Raster(data))
+        OutRas.save(outdir + os.sep + 'Con_' + data)
     return 1
 
 
 
-path = {r'J:\Integrated_analysis_data\Data\1Y\LAI_2003_2017_1y':'tif'}
+path = {
+        r'E:\Integrated_analysis_data\Data\Vertify_out\Bagging_forest':'Bagging*.tif'}
 
 
-styear = 2003
+styear = 2000
 edyear = 2017
 
 for inpath in path:
     print(inpath)
-    character = 'Mask*.' + path[inpath]
+    character = path[inpath]
     for year in range(styear, edyear + 1):
         indir = inpath + os.sep + str(year)
         outdir = indir

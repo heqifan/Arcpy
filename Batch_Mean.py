@@ -92,12 +92,13 @@ def Mean2(year_list,outdir,name):
 
 styear = 2000
 edyear = 2017
-inpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight'
-outpath = r'E:\Integrated_analysis_data\Data\Vertify_out\Weight\Weight_Year_Mean'
-character = 'Weight*.tif'
+name = 'Weight'
+inpath = r'E:\Integrated_analysis_data\Data\Vertify_out' + os.sep + name
+outpath = inpath + os.sep + name + '_Year_Mean'
+character = 'Con_' + name + '*.tif'
 year_list = []
 for year in range(styear, edyear + 1):
     indir = inpath + os.sep + str(year)
     tif = glob.glob(indir + os.sep + character)[0]
     year_list.append(tif)
-Mean2(year_list, outpath, 'Weight')
+Mean2(year_list, outpath, name)
